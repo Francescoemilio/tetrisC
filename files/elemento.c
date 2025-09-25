@@ -21,8 +21,8 @@ elemento *creaElemento(int w, int h, int **m, int dim){
     }
     e->listaBlocchi =  (blocco **)malloc(sizeof(blocco)*dim);
     int cont = 0;
-    for(int i= 0; i<h; i++)
-        for(int j =0; j<w; j++ ){
+    for(int i= 0; i<w; i++)
+        for(int j =0; j<h; j++ ){
             e->matrice[i][j] = m[i][j];
             if(m[i][j] == 1 && cont < dim){
                 e->listaBlocchi[cont] = creaBloccoByPos(i, j);
@@ -47,11 +47,11 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
     if(modo == NULL || *modo == 1){
         printf("Elemento: {dimensione: %d, larghezza: %d, altezza: %d}\n",e->dimensione, e->width, e->height);
         printf("Matrice:\n\t");
-        for(int i = 0; i<e->height; i++){
-            for(int j = 0; j<e->width; j++){
-                if(e->matrice[j][i]==0)
+        for(int i = 0; i<e->width; i++){
+            for(int j = 0; j<e->height; j++){
+                if(e->matrice[i][j]==0)
                     printf(" ");
-                else if(e->matrice[j][i]==1)
+                else if(e->matrice[i][j]==1)
                     printf("#");
             }
             printf("\n\t");
@@ -74,17 +74,36 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
         }
 
         int k = 2;
-        for(int i = 0; i<e->height; i++){
-          for(int j = 0; j<e->width; j++){
-            if(e->matrice[j][i] == 1){
-                stampaCubo( coordinataX+j*6, coordinataY+i*3 ,*modo-k );
+        for(int i = 0; i<e->width; i++){
+          for(int j = 0; j<e->height; j++){
+            if(e->matrice[i][j] == 1){
+                stampaCubo3x3( coordinataX+j*6, coordinataY+i*3 ,*modo-k );
+            }
+          }
+        }
+    }
+    else if(modo != NULL && (*modo == 4 || *modo == 5)){
+        int coordinataX;
+        int coordinataY;
+        if( posX != NULL && posY != NULL ){
+            coordinataX = *posX;
+            coordinataY = *posY;
+        }
+        else{
+            getConsolePosition( &coordinataX, &coordinataY );
+        }
+        int k = 4;
+        for(int i = 0; i<e->width; i++){
+          for(int j = 0; j<e->height; j++){
+            if(e->matrice[i][j] == 1){
+                stampaCubo2x2( coordinataX+j*3, coordinataY+i*2 ,*modo-k );
             }
           }
         }
     }
 }
 
-void stampaCubo(int posX, int posY, int scelta){
+void stampaCubo3x3(int posX, int posY, int scelta){
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD coord;
     coord.X = posX;
@@ -109,3 +128,15 @@ void stampaCubo(int posX, int posY, int scelta){
     printf("%c",opzioni[scelta].BDXC);
 }
 
+
+void stampaCubo2x2(int posX, int posY, int scelta){
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD coord;
+    coord.X = posX;
+    coord.Y = posY;
+    SetConsoleCursorPosition(h, coord);
+    printf("%c%c%c",opzioni[scelta].TSXC, opzioni[scelta].orizzontale, opzioni[scelta].TDXC);
+    coord.Y++;
+    SetConsoleCursorPosition(h, coord);
+    printf("%c%c%c",opzioni[scelta].BSXC, opzioni[scelta].orizzontale, opzioni[scelta].BDXC);
+}

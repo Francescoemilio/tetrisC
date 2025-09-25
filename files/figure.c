@@ -9,10 +9,10 @@ elemento *getFigura( int n ){
         case 1: return getCubo();  break;
         case 2: return getCroce(); break;
         case 3: return getL();  break;
-        //case 4: return getReverseL(); break;
-        //case 5: return getLong();  break;
-        //case 6: return getSnake(); break;
-        //case 7: return getReverseSnake();  break;
+        case 4: return getReverseL(); break;
+        case 5: return getLong();  break;
+        case 6: return getSnake(); break;
+        case 7: return getReverseSnake();  break;
         default: return getCubo(); break;
     }
 }
@@ -31,38 +31,77 @@ elemento *getCubo(){
 }
 
 elemento *getCroce(){
-    int dimensione = 4, larghezza = 3, altezza = 2;
+    int dimensione = 4, larghezza = 2, altezza = 3;
     int **matriceElemento = getMatrice(larghezza, altezza);
     matriceElemento[0][0] = 0;
-    matriceElemento[1][1] = 1;
-    matriceElemento[2][0] = 0;
-    matriceElemento[0][1] = 1;
     matriceElemento[1][0] = 1;
-    matriceElemento[2][1] = 1;
+    matriceElemento[0][1] = 1;
+    matriceElemento[1][1] = 1;
+    matriceElemento[0][2] = 0;
+    matriceElemento[1][2] = 1;
     elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
     return  e;
 }
 
 elemento *getL(){
-    printf("Sono in getL\n");
-    int dimensione = 4, larghezza = 2, altezza = 3;
+    int dimensione = 4, larghezza = 3, altezza = 2;
     int **matriceElemento = getMatrice(larghezza, altezza);
-    printf("Ora popolo la matrice\n");
-    for(int i = 0; i<altezza; i++)
-        for(int j = 0; j<larghezza; j++){
-            matriceElemento[j][i] = (i*j)+i;
-            printf("\tIn posizione i:%d j:%d ho inserito %d\n",i,j,(i*j)+i);
-            }
-    printf("Stampo matrice:\n");
-    stampaMatrice(matriceElemento, larghezza, altezza);
+    matriceElemento[0][0] = 1;
+    matriceElemento[1][0] = 1;
+    matriceElemento[2][0] = 1;
+    matriceElemento[0][1] = 0;
+    matriceElemento[1][1] = 0;
+    matriceElemento[2][1] = 1;
     elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
     return  e;
 }
 
-elemento *getReverseL();
+elemento *getReverseL(){
+    int dimensione = 4, larghezza = 3, altezza = 2;
+    int **matriceElemento = getMatrice(larghezza, altezza);
+    matriceElemento[0][0] = 0;
+    matriceElemento[1][0] = 0;
+    matriceElemento[2][0] = 1;
+    matriceElemento[0][1] = 1;
+    matriceElemento[1][1] = 1;
+    matriceElemento[2][1] = 1;
+    elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
+    return  e;
+}
 
-elemento *getLong();
+elemento *getLong(){
+    int dimensione = 4, larghezza = 4, altezza = 1;
+    int **matriceElemento = getMatrice(larghezza, altezza);
+    matriceElemento[0][0] = 1;
+    matriceElemento[1][0] = 1;
+    matriceElemento[2][0] = 1;
+    matriceElemento[3][0] = 1;
+    elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
+    return  e;
+}
 
-elemento *getSnake();
+elemento *getSnake(){
+    int dimensione = 4, larghezza = 2, altezza = 3;
+    int **matriceElemento = getMatrice(larghezza, altezza);
+    matriceElemento[0][0] = 0;
+    matriceElemento[0][1] = 1;
+    matriceElemento[0][2] = 1;
+    matriceElemento[1][0] = 1;
+    matriceElemento[1][1] = 1;
+    matriceElemento[1][2] = 0;
+    elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
+    return  e;
+}
 
-elemento *getReverseSnake();
+elemento *getReverseSnake(){
+    int dimensione = 4, larghezza = 2, altezza = 3;
+    int **matriceElemento = getMatrice(larghezza, altezza);
+    matriceElemento[0][0] = 1;
+    matriceElemento[0][1] = 1;
+    matriceElemento[0][2] = 0;
+    matriceElemento[1][0] = 0;
+    matriceElemento[1][1] = 1;
+    matriceElemento[1][2] = 1;
+    elemento *e = creaElemento(larghezza, altezza, matriceElemento, dimensione);
+    return  e;
+}

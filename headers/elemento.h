@@ -22,6 +22,7 @@ elemento *creaElementoVuoto();
 elemento *creaElemento(int w, int h, int **m, int dim);
 void distruggiElemento( elemento *e );
 void stampaElemento( elemento *e, int *modo, int *posX, int *posY);
-void stampaCubo(int posX, int posY, int scelta);
+void stampaCubo3x3(int posX, int posY, int scelta);
+void stampaCubo2x2(int posX, int posY, int scelta);
 
 #endif

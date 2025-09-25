@@ -7,7 +7,7 @@
 
 int main( int argc, char *argv[]  ){
     //Valori di default per impostazioni
-    int figura = 0;
+    int figura = 1;
     int modalita = 0;
     if( argc == 3 ){
       figura = atoi( argv[1] );
@@ -17,11 +17,16 @@ int main( int argc, char *argv[]  ){
       termina(stderr, "Uso errato del programma. Usare come:\n\tTetris x y\n\tCon:\n\t x = figura da visualizzare\n\t y = modalita", __FILE__, __LINE__);
     }
 
-    elemento *e = getFigura( figura );
-    stampaMatrice(e->matrice, e->width, e->height);
-    
+    elemento *e = getFigura(figura);
     stampaElemento(e, &modalita, NULL, NULL);
     distruggiElemento(e);
+
+    /*
+    for(int i = 0; i<7; i++ ){
+      elemento *e = getFigura( i+1 );
+      stampaMatrice(e->matrice, e->width, e->height);
+      distruggiElemento(e);
+    }*/
 
     return 0;
 }

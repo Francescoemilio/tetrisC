@@ -48,9 +48,9 @@ int **getMatrice( int w, int h ){
 
 
 void stampaMatrice(int **m, int w, int h){
-    for(int i= 0; i<h; i++){
-      for(int j= 0; j<w; j++){
-        printf("%d ",m[j][i]);
+    for(int i= 0; i<w; i++){
+      for(int j= 0; j<h; j++){
+        printf("%d ",m[i][j]);
       }
       printf("\n");
     }
