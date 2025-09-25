@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "elemento.h": "c"
+        "elemento.h": "c",
+        "funzionigrafiche.h": "c"
     }
 }

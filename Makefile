@@ -10,7 +10,7 @@ OBJ_DIR = obj # Cartella dei file .o
 
 # Target principale
 tetris:
-	$(CC) $(CFLAGS) -o $@ files/blocco.c files/funzioni.c files/main.c files/elemento.c files/figure.c
+	$(CC) $(CFLAGS) -o $@ files/blocco.c files/funzioni.c files/main.c files/elemento.c files/figure.c files/funzioniGrafiche.c
 
 
 # Regole di compilazione

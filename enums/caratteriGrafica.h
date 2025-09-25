@@ -4,8 +4,8 @@
 
 #ifndef CARATTERIGRAFICA_H
 #define CARATTERIGRAFICA_H
+#define NUMERO_OPZIONI 2;
 
-#endif //CARATTERIGRAFICA_H
 
 struct componenteGrafico{
     int verticale;
@@ -15,6 +15,11 @@ struct componenteGrafico{
     int BSXC;
     int BDXC;
     int BLANK;
+    int TUP;
+    int TRIGHT;
+    int TBOTTOM;
+    int TLEFT;
+    int FULL;
 };
 typedef struct componenteGrafico grafica;
 
@@ -32,8 +37,10 @@ xxxxxx
 ║    ║y
 ╚════╝y
  */
-const int numeroOpzioni = 2;
 const grafica opzioni[2] = {
-    { 179, 196, 218, 191, 192, 217, 32 },
-    { 186, 205, 201, 187, 200, 188, 32 }
+    { 179, 196, 218, 191, 192, 217, 32, 193, 195, 194, 180, 197 }, // │ ─ ┌ ┐ └ ┘ ' ' ┴ ├ ┬ ┤ ┼
+    { 186, 205, 201, 187, 200, 188, 32, 202, 204, 203, 185, 206 }  // ║ ═ ╔ ╗ ╚ ╝ ' ' ╩ ╠ ╦ ╣ ╬ 
     };
+
+    
+#endif //CARATTERIGRAFICA_H

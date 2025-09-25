@@ -140,3 +140,27 @@ void stampaCubo2x2(int posX, int posY, int scelta){
     SetConsoleCursorPosition(h, coord);
     printf("%c%c%c",opzioni[scelta].BSXC, opzioni[scelta].orizzontale, opzioni[scelta].BDXC);
 }
+
+
+elemento *ruotaOrario( elemento *e ){
+    int nuovaDimensione = e->dimensione, nuovaLarghezza = e->height, nuovaAltezza = e->width;
+    int **matriceNuova = getMatrice( nuovaLarghezza, nuovaAltezza );
+    for(int i = 0; i<e->width; i++)
+        for(int j = 0; j<e->height; j++)
+            matriceNuova[j][e->width-1-i] = e->matrice[i][j];
+    elemento *nuovoElemento = creaElemento( nuovaLarghezza, nuovaAltezza, matriceNuova, nuovaDimensione );
+    distruggiElemento(e);
+    return nuovoElemento;
+}
+
+
+elemento *ruotaAntiOrario( elemento *e ){
+    int nuovaDimensione = e->dimensione, nuovaLarghezza = e->height, nuovaAltezza = e->width;
+    int **matriceNuova = getMatrice( nuovaLarghezza, nuovaAltezza );
+    for(int i = 0; i<e->width; i++)
+        for(int j = 0; j<e->height; j++)
+            matriceNuova[e->height-1-j][i] = e->matrice[i][j];
+    elemento *nuovoElemento = creaElemento( nuovaLarghezza, nuovaAltezza, matriceNuova, nuovaDimensione );
+    distruggiElemento(e);
+    return nuovoElemento;
+}
