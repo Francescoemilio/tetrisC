@@ -21,3 +21,15 @@ creaElemento. Quindi l utilizzo della funzione potrebbe essere qualcosa tipo:
 elemento = ruotaOrario(elemento);
 E poi l elemento viene distrutto (il precedente) e viene restituita la nuova zona di memoria in cui puntare.
 Questo è inevitabile, in quanto gli array hanno dimensioni diverse finita la rotazione.
+
+### Funzione grafica
+Anzichè inserire una nuova modalita di stampa degli elementi posso creare una nuova funzione a parte che va a disegnare le matrici in un dato modo a seconda di com'è composta la matrice  (matrice che deve essere composta da 1 e 0).
+Per esemmpio una matrice composta come:
+1 0
+1 0
+1 1
+verrà stampata in questo modo:
+┌─┐
+├─┤
+├─┼─┐
+└─┴─┘
