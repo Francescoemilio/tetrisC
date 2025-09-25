@@ -18,14 +18,14 @@ struct componenteGrafico{
 };
 typedef struct componenteGrafico grafica;
 
-const grafica scelta2 = { 179, 196, 218, 191, 192, 217, 32 }; // │ ─ ┌ ┐ └ ┘
+//const grafica scelta2 = { 179, 196, 218, 191, 192, 217, 32 }; // │ ─ ┌ ┐ └ ┘
 /*
 xxxxxx
 ┌────┐y
 │    │y
 └────┘y
  */
-const grafica scelta3 = { 186, 205, 201, 187, 200, 188, 32 }; //
+//const grafica scelta3 = { 186, 205, 201, 187, 200, 188, 32 }; //
 /*
 xxxxxx
 ╔════╗y

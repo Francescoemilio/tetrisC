@@ -1,4 +1,5 @@
 #include "../headers/elemento.h"
+#include "../enums/caratteriGrafica.h"
 
 elemento *creaElementoVuoto(){
     elemento *e = (elemento *) malloc(sizeof(elemento));
@@ -48,9 +49,9 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
         printf("Matrice:\n\t");
         for(int i = 0; i<e->height; i++){
             for(int j = 0; j<e->width; j++){
-                if(e->matrice[i][j]==0)
+                if(e->matrice[j][i]==0)
                     printf(" ");
-                else if(e->matrice[i][j]==1)
+                else if(e->matrice[j][i]==1)
                     printf("#");
             }
             printf("\n\t");
@@ -61,12 +62,22 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
             stampaBlocco( e->listaBlocchi[cont] );
         }
     }
-    else if(modo != NULL && (*modo == 2 || *modo == 3) && posX != NULL && posY != NULL){
+    else if(modo != NULL && (*modo == 2 || *modo == 3)){
+        int coordinataX;
+        int coordinataY;
+        if( posX != NULL && posY != NULL ){
+            coordinataX = *posX;
+            coordinataY = *posY;
+        }
+        else{
+            getConsolePosition( &coordinataX, &coordinataY );
+        }
+
         int k = 2;
         for(int i = 0; i<e->height; i++){
           for(int j = 0; j<e->width; j++){
-            if(e->matrice[i][j] == 1){
-
+            if(e->matrice[j][i] == 1){
+                stampaCubo( coordinataX+j*6, coordinataY+i*3 ,*modo-k );
             }
           }
         }
@@ -86,7 +97,7 @@ void stampaCubo(int posX, int posY, int scelta){
     coord.Y ++;
     SetConsoleCursorPosition(h, coord);
     printf("%c",opzioni[scelta].verticale);
-    coord.X += 4;
+    coord.X += 5;
     SetConsoleCursorPosition(h, coord);
     printf("%c",opzioni[scelta].verticale);
     coord.Y ++;
