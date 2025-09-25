@@ -28,8 +28,8 @@ Per esemmpio una matrice composta come:
 1 0
 1 0
 1 1
-verrà stampata in questo modo:
-┌─┐
-├─┤
-├─┼─┐
-└─┴─┘
+verrà stampata in questo modo:  
+┌─┐  
+├─┤  
+├─┼─┐  
+└─┴─┘  
