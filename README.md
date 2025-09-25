@@ -33,3 +33,13 @@ verrà stampata in questo modo:
 ├─┤  
 ├─┼─┐  
 └─┴─┘  
+
+
+## Features:
+Qui inserisco le features che andrò ad inserire nel codice.  
+Ogni feature è associata ad un codice, in modo tale che i branch corrispondenti alla feature si possano semplicemente chiamare "feature#ID" , questo per trovare piu facilmente le features e le loro descrizioni , e viceversa.
+
+### Feature2390
+In questa feature andrò ad inserire la rotazione e la modalita grafica nuova.  
+La rotazione permetterà di ruotare una piccola matrice (quelle che compongono gli elementi) in senso orario o insenso anti-orario, andando a restituire una  nuova matrice con altezza e larghezza inverse rispetto alla matrice di partenza.  
+La funzione grafica invece permetterà di disegnare una matrice composta di 0 e 1 sulla console in una versione compatta e graficamente soddisfacente per essere sulla console.
