@@ -6,7 +6,8 @@
 #include "blocco.h"
 #include <windows.h>
 #include "funzioni.h"
-
+#include "funzioniGrafiche.h"
+#include "../enums/caratteriGrafica.h"
 struct elemento_s{
     int height;
     int width;

@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "../headers/blocco.h"
-#include "../headers/funzioni.h"
 
 
 

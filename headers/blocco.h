@@ -1,9 +1,8 @@
 #ifndef BLOCCO_H
 #define BLOCCO_H
-
-
 #include <stdlib.h>
 #include <stdio.h>
+#include "../headers/funzioni.h"
 
 struct blocco_s{
     int posX;

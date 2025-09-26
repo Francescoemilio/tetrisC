@@ -2,7 +2,6 @@
 
 
 elemento *getFigura( int n ){
-    printf("Get figura %d\n",n);
     if( n > FIGURES || n < 1)
         termina(stderr, "Valore figura non valido.", __FILE__, __LINE__);
     switch( n ){

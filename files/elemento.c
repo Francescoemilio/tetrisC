@@ -1,5 +1,4 @@
 #include "../headers/elemento.h"
-#include "../enums/caratteriGrafica.h"
 
 elemento *creaElementoVuoto(){
     elemento *e = (elemento *) malloc(sizeof(elemento));
@@ -103,43 +102,7 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
     }
 }
 
-void stampaCubo3x3(int posX, int posY, int scelta){
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD coord;
-    coord.X = posX;
-    coord.Y = posY;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c",opzioni[scelta].TSXC);
-    for(int i = 0 ; i<4; i++)
-        printf("%c",opzioni[scelta].orizzontale);
-    printf("%c",opzioni[scelta].TDXC);
-    coord.Y ++;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c",opzioni[scelta].verticale);
-    coord.X += 5;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c",opzioni[scelta].verticale);
-    coord.Y ++;
-    coord.X = posX;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c",opzioni[scelta].BSXC);
-    for(int i = 0 ; i<4; i++)
-        printf("%c",opzioni[scelta].orizzontale);
-    printf("%c",opzioni[scelta].BDXC);
-}
 
-
-void stampaCubo2x2(int posX, int posY, int scelta){
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD coord;
-    coord.X = posX;
-    coord.Y = posY;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c%c%c",opzioni[scelta].TSXC, opzioni[scelta].orizzontale, opzioni[scelta].TDXC);
-    coord.Y++;
-    SetConsoleCursorPosition(h, coord);
-    printf("%c%c%c",opzioni[scelta].BSXC, opzioni[scelta].orizzontale, opzioni[scelta].BDXC);
-}
 
 
 elemento *ruotaOrario( elemento *e ){

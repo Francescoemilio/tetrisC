@@ -4,7 +4,7 @@
 
 #ifndef CARATTERIGRAFICA_H
 #define CARATTERIGRAFICA_H
-#define NUMERO_OPZIONI 2;
+#define NUMERO_OPZIONI 3
 
 
 struct componenteGrafico{
@@ -37,9 +37,10 @@ xxxxxx
 ║    ║y
 ╚════╝y
  */
-const grafica opzioni[2] = {
+static const grafica opzioni[3] = {
     { 179, 196, 218, 191, 192, 217, 32, 193, 195, 194, 180, 197 }, // │ ─ ┌ ┐ └ ┘ ' ' ┴ ├ ┬ ┤ ┼
-    { 186, 205, 201, 187, 200, 188, 32, 202, 204, 203, 185, 206 }  // ║ ═ ╔ ╗ ╚ ╝ ' ' ╩ ╠ ╦ ╣ ╬ 
+    { 186, 205, 201, 187, 200, 188, 32, 202, 204, 203, 185, 206 }, // ║ ═ ╔ ╗ ╚ ╝ ' ' ╩ ╠ ╦ ╣ ╬ 
+    { 186, 205, 'P', 'X', 'L', 'O', 32, 202, 204, 'T', 'R', 'F' }
     };
 
     
