@@ -257,7 +257,9 @@ static void stampaMatriceTradotta(int **m, const int RIGHE, const int COLONNE, c
     if( h == INVALID_HANDLE_VALUE )
         termina(stderr, "Handle della console non valido.", __FILE__, __LINE__);
     COORD coordinate;
-    getConsolePosition( &coordinate.X, &coordinate.Y );
+    int coord_temp_X, coord_temp_Y;
+    getConsolePosition( &coord_temp_X, &coord_temp_Y );
+    coordinate.X = coord_temp_X, coordinate.Y = coord_temp_Y;
     if( posX != NULL && posY != NULL ){
         coordinate.X = *posX;
         coordinate.Y = *posY;

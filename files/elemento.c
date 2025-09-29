@@ -100,6 +100,12 @@ void stampaElemento( elemento *e, int *modo, int *posX, int *posY){
           }
         }
     }
+    else if( modo != NULL && *modo == 6){
+        stampaMatriceBella(NULL, NULL, e->matrice, e->width, e->height, 0);
+    }
+    else {
+        printf("Hai passato un valore non valido.\n");
+    }
 }
 
 
