@@ -4,33 +4,34 @@
 //FUNZIONI UTENTE
 utente *creaUtenteVuoto(){
     utente *u = (utente *)malloc( sizeof(utente) );
-    strcpy(u->nome, "???"  );
+    strcpy(u->nome, "???\0"  );
     u->punteggioMax= 0;
     u->durataMax = 0;
     u->durataMedia = 0;
     u->nPartiteGiocate = 0;
-    u->bloccoPreferito = 0;
+    u->bloccoPreferito = 1;
     for(int i = 0; i<FIGURES; i++)
         u->blocchiVincenti[i] = 0;
     u->coloriGrafica = 15;
-    u->modalitaGrafica = 1;
+    u->modalitaGrafica = 6;
     return u;
 }
 
 
 utente *creaUtente(const char *nome ){
     utente *u = (utente *)malloc( sizeof(utente) );
-    u->nome = (char *)malloc( sizeof(char) * strlen(nome)+1 );
-    strcpy(u->nome, nome );
+    int e = snprintf( u->nome, DIMENSIONE_NOMI, "%s", nome );
+    if( e < 0 )
+        termina(stderr, "Errore con il nome dell utente.", __FILE__, __LINE__);
     u->punteggioMax= 0;
     u->durataMax = 0;
     u->durataMedia = 0;
     u->nPartiteGiocate = 0;
-    u->bloccoPreferito = 0;
+    u->bloccoPreferito = 1;
     for(int i = 0; i<FIGURES; i++)
         u->blocchiVincenti[i] = 0;
     u->coloriGrafica = 15;
-    u->modalitaGrafica = 1;
+    u->modalitaGrafica = 6;
     return u;
 }
 void distruggiUtente( utente * u ){
@@ -53,11 +54,11 @@ int salvaUtenti( const char* path, utente **u, const int numeroUtenti ){
             fprintf(f, "NOME: %s\n", u[i]->nome);
             fprintf(f, "PUNTEGGIO_MAX: %d\n", u[i]->punteggioMax);
             fprintf(f, "DURATA_MAX: %d\n", u[i]->durataMax);
-            fprintf(f, "DURATA_MEDIA: %d\n", u[i]->nome);
-            fprintf(f, "PARTITE_GIOCATE: %d\n", u[i]->nome);
-            fprintf(f, "BLOCCO_PREFERITO: %d\n", u[i]->nome);
-            fprintf(f, "COLORI_GRAFICA: %d\n", u[i]->nome);
-            fprintf(f, "MODALITA_GRAFICA: %d\n", u[i]->nome);
+            fprintf(f, "DURATA_MEDIA: %d\n", u[i]->durataMedia);
+            fprintf(f, "PARTITE_GIOCATE: %d\n", u[i]->nPartiteGiocate);
+            fprintf(f, "BLOCCO_PREFERITO: %d\n", u[i]->bloccoPreferito);
+            fprintf(f, "COLORI_GRAFICA: %d\n", u[i]->coloriGrafica);
+            fprintf(f, "MODALITA_GRAFICA: %d\n", u[i]->modalitaGrafica);
             fprintf(f, "BLOCCHI_VINCENTI: [");
             for(int j = 0; j<FIGURES; j++){
                 fprintf(f," %d",u[i]->blocchiVincenti[j]);
@@ -89,7 +90,32 @@ utente **caricaUtenti( const char* path, int *dimensione ){
     for(int i = 0; i<size; i++){
         listaUtenti[i] = creaUtenteVuoto();
     }
+    //Ora l'array è pronto per essere popolato.
+    for(int i = 0; i < size; i++){
+        e = 0;
+        e += fscanf(f, "NOME: %s\n", listaUtenti[i]->nome);
+        e += fscanf(f, "PUNTEGGIO_MAX: %d\n", &listaUtenti[i]->punteggioMax);
+        e += fscanf(f, "DURATA_MAX: %d\n", &listaUtenti[i]->durataMax);
+        e += fscanf(f, "DURATA_MEDIA: %d\n", &listaUtenti[i]->durataMedia);
+        e += fscanf(f, "PARTITE_GIOCATE: %d\n", &listaUtenti[i]->nPartiteGiocate);
+        e += fscanf(f, "BLOCCO_PREFERITO: %d\n", &listaUtenti[i]->bloccoPreferito);
+        e += fscanf(f, "COLORI_GRAFICA: %d\n", &listaUtenti[i]->coloriGrafica);
+        e += fscanf(f, "MODALITA_GRAFICA: %d\n", &listaUtenti[i]->modalitaGrafica);
+        if(e != 8)
+            termina(stderr, "Errore lettura utente", __FILE__, __LINE__);
+        fscanf(f, "BLOCCHI_VINCENTI: [");
+        e = 0;
+        for(int j = 0; j<FIGURES; j++){
+            e += fscanf(f, " %d",&listaUtenti[i]->blocchiVincenti[j]);
+            if( j < FIGURES-1 )
+                fscanf(f, ",");
+            }
+        if( e != FIGURES )
+            termina(stderr, "Errore lettura utente", __FILE__, __LINE__);
+        fscanf(f, " ]\n--------------------\n");
+        }
     fclose(f);
+    return listaUtenti;
 }
 
 
@@ -98,4 +124,24 @@ void distruggiUtenti( utente **lista, const int dimensioneLista ){
         return;
     for(int i = 0; i<dimensioneLista; i++)
         distruggiUtente( lista[i] );
+}
+
+void stampaUtente(utente *u){
+    if(u == NULL)
+        termina(stderr, "Errore stampa utente. Utente null.",__FILE__,__LINE__);
+    printf("Utente %s:\n",u->nome);
+    printf("\tpunteggio max: %d\n",u->punteggioMax);
+    printf("\tdurata media: %d\n",u->durataMedia);
+    printf("\tpartite giocate: %d\n",u->nPartiteGiocate);
+    printf("\tblocco preferito: %d\t\n\t",u->bloccoPreferito);
+    stampaElemento(getFigura(u->bloccoPreferito), &u->modalitaGrafica, NULL, NULL);
+    printf("\n\tcolori grafica: %d\n",u->coloriGrafica);
+    printf("\tmodalita grafica: %d\n",u->modalitaGrafica);
+    printf("\tBlocchi vincenti: [ ");
+    for(int i = 0; i<FIGURES; i++){
+        printf("%d",u->blocchiVincenti[i]);
+        if(i<FIGURES-1)
+            printf(", ");
+    }
+    printf(" ]\n---------------------\n");
 }

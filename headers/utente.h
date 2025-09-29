@@ -30,4 +30,9 @@ void salvaUtente( const char* path, utente *u );
 int salvaUtenti( const char* path, utente **u, const int numeroUtenti  );
 utente **caricaUtenti( const char* path, int *dimensione );
 void distruggiUtenti( utente **lista, const int dimensioneLista );
+void stampaUtente(utente *u);
 #endif
+
+
+
+//█▀▄   →   ←    ↑    ↓
