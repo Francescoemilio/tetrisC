@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <windows.h>
 #include "../headers/funzioni.h"
 
 
@@ -50,8 +47,23 @@ int **getMatrice( int w, int h ){
 void stampaMatrice(int **m, int w, int h){
     for(int i= 0; i<w; i++){
       for(int j= 0; j<h; j++){
-        printf("%d ",m[i][j]);
+        printf("%3d ",m[i][j]);
       }
       printf("\n");
     }
+}
+
+void distruggiMatrice(int **m, const int RIGHE){
+    for(int i= 0; i<RIGHE; i++){
+        free(m[i]);
+      }
+    free(m);
+}
+
+
+void inizializzaMatrice(int **m, int RIGHE, int COLONNE){
+    for(int i = 0; i<RIGHE; i++){
+        for(int j = 0; j<COLONNE; j++)
+            m[i][j] = 0;
+    }   
 }
