@@ -93,3 +93,27 @@ All interno del while diversi timer gestiranno il gioco:
 * Il primo timer è per i tasti premuti, l'utente può premere un tasto solo ogni 100 millisecondi, altrimenti viene cancellato quello che ha cliccato.
 * Il secondo timer è per il movimento dell'elemento, aumentando il tempo di gioco aumenta anche il livello di difficolta, quindi diminuisce il delay del movimento del blocco
 fino a 400 milliseconddi, partendo da 1500 (andando a diminuire di 100 ogni 2 minuti di gioco).
+
+### Feature6390
+Feature Grafica.  
+In questa feature andrò a descrivere le funzioni minime che servono per completare la libreria grafica per il tetris.  
+Le funzioni dipendono direttamente da quante fasi/schermate di gioco esistono, sulla base di questo numero andranno a cambiare anche le funzioni grafiche.
+Le scheramte di gioco sono:  
+* schermata iniziale
+* schermata di accesso
+* schermata di registrazione
+* schermata principale
+* schermata statistiche
+* schermata impostazioni
+* schermata di gioco
+* schermata di pausa gioco (?)
+* schermata di carica partita (?)
+Ogni schermata è stata descritta nei miei appunti.  
+Verrà inoltre aggiunto un file .h che contenga tutte le lettere dell alfabeto sotto forma di matrice 5x4, in questo modo potrò scrivere scritte ovunque, grandi quanto voglio in maniera molto agile. Per questa parte qua preferirei aggiungere una nuova libreria in modo tale che sia portabile nei prossimi progetti.  
+All'interno del .h della libreria posso andare a descrivere tramite un array static const (che contiene *matrici*) tutte le lettere come le preferisco.  
+Oltre alle normali funzioni (getLettera, printLettera etcetc), ci sarà una funzione stampaScritta che prende un array di char (e delle impostazioni) e stampa a schermo la scritta seguendo le impostazioni date. Le impostazioni comprenderanno:
+* PosX e posY che potranno anche essere null, nel caso verrà presa la posizione in quel momento del cursore nella console.
+* Dimensione delle scritte, un int che rappresnta quanto espansi saranno i quadrati, la base è 2, ma inserendo un numero maggiore di 2 si va a definire quanto grande dovrà essere il quadrato per ogni 'pixel'.
+* array di colori e la sua dimensione. L'array serve a dare il colore alle scritte, se c e piu di un elemento si applica il colore di quell elemento alle lettere in maniera ciclica. Quindi la prima lettera prenderà il colore presente in posizione 0, la seconda lettera prenderà il colore presente in posizione 1, etcetc fino a lettera n con colore m.
+Se i colori finiscono, ri-inizia il conteggio da 0.
+* valore numerico che definisce l'opacità delle lettere, per questo definirò anche  una enum che permetterà all utente di appunto chiamare brightness.HIGH, MEDIUM, oppure LOW. come primi tre valori.
