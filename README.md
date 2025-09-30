@@ -108,6 +108,7 @@ Le scheramte di gioco sono:
 * schermata di gioco
 * schermata di pausa gioco (?)
 * schermata di carica partita (?)
+
 Ogni schermata è stata descritta nei miei appunti.    
 
 Verrà inoltre aggiunto un file .h che contenga tutte le lettere dell alfabeto sotto forma di matrice 5x4, in questo modo potrò scrivere scritte ovunque, grandi quanto voglio in maniera molto agile. Per questa parte qua preferirei aggiungere una nuova libreria in modo tale che sia portabile nei prossimi progetti.  
