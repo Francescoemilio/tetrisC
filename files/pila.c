@@ -28,12 +28,50 @@ void pushPila(int value, pila *p){
         p->head = getNodo( value );
         return;
         }
-    nodo_P *temp;
+    nodo_P *temp = p->head;
+    if( temp->next == NULL ){
+        temp->next = nodo;
+        return;
+    }
+    while( temp->next != NULL )
+        temp = temp->next;
+    temp->next = nodo;
 }
-int popPila( pila *p );
+int popPila( pila *p ){
+    if( pilaVuota(p))
+        return 0;
+    if( p->head->next == NULL ){
+        int rv = p->head->value;
+        free(p->head);
+        p->head = NULL;
+        return rv;
+    }
+    nodo_P *temp;
+    temp = p->head;
+    while(temp->next->next != NULL)
+        temp = temp->next;
+    int rv = temp->next->value;
+    free(temp->next);
+    temp->next = NULL;
+    return rv;
+}
 
 
-void stampaPila(pila *p);
+void stampaPila(pila *p){
+    if(pilaVuota(p)){
+        printf("Pila vuota.\n");
+        return;
+    }
+    printf("Pila: { ");
+    nodo_P *temp = p->head;
+    while(temp != NULL){
+        printf("%d",temp->value);
+        if(temp->next)
+            printf(", ");
+        temp = temp->next;
+    }
+    printf(" }");
+}
 
 
 int pilaVuota(pila *p){

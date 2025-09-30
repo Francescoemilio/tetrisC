@@ -7,7 +7,7 @@
 
 struct nodo_s{
     int value;
-    nodo_P *next;
+    struct nodo_s *next;
 };
 typedef struct  nodo_s nodo_P;
 

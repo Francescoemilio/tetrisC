@@ -8,6 +8,7 @@
 #include "../headers/figure.h"
 #include "../headers/utente.h"
 #include "../headers/funzioniGrafiche.h"
+#include "../headers/pila.h"
 
 #define N 10
 #define M 10
@@ -15,7 +16,7 @@
 int switchaFigura(int v, int incremento);
 int switchaModalita(int m, int incremento);
 void mostraBlocchi(int figura, int modalita);
-
+void gestioneUtenti();
 
 int main( int argc, char *argv[]  ){
     //Valori di default per impostazioni
@@ -31,18 +32,22 @@ int main( int argc, char *argv[]  ){
     (void)figura;
     (void)modalita;
 
-    printf("Prova\n\n");
-    int dimensione;
-    utente **listaUtenti = caricaUtenti("listaUtenti.txt", &dimensione);
-    if(listaUtenti == NULL)
-      termina(stdout, "Lista utenti non caricata bene nel main.", __FILE__, __LINE__);
-    for(int i = 0; i<dimensione; i++)
-      stampaUtente(listaUtenti[i]);
-    salvaUtenti("ProvaUtentei2.txt", listaUtenti, dimensione);
-    printf("spengo tutto.\n");
-
+    int array[10] = {4, 7, 1, 90, 3, 56, 3, 87, 2, 45};
+    pila *p = getPila();
+    stampaPila(p);
+    for(int i = 0; i<1;i ++){
+      pushPila(array[i], p);
+    }
+    int rv = popPila( p );
+    stampaPila(p);
+    printf("\nValore restituito: %d",rv);
     return 0;
 }
+
+
+
+
+
 
 int switchaFigura(int v, int incremento){
   if(incremento != 0){
@@ -159,3 +164,15 @@ void mostraBlocchi(int figura, int modalita){
 }
 
 
+void gestioneUtenti(){
+    printf("Prova\n\n");
+    int dimensione;
+    utente **listaUtenti = caricaUtenti("listaUtenti.txt", &dimensione);
+    if(listaUtenti == NULL)
+      termina(stdout, "Lista utenti non caricata bene nel main.", __FILE__, __LINE__);
+    for(int i = 0; i<dimensione; i++)
+      stampaUtente(listaUtenti[i]);
+    salvaUtenti("ProvaUtentei2.txt", listaUtenti, dimensione);
+    printf("spengo tutto.\n");
+
+}
