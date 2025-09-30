@@ -108,7 +108,8 @@ Le scheramte di gioco sono:
 * schermata di gioco
 * schermata di pausa gioco (?)
 * schermata di carica partita (?)
-Ogni schermata è stata descritta nei miei appunti.  
+Ogni schermata è stata descritta nei miei appunti.    
+
 Verrà inoltre aggiunto un file .h che contenga tutte le lettere dell alfabeto sotto forma di matrice 5x4, in questo modo potrò scrivere scritte ovunque, grandi quanto voglio in maniera molto agile. Per questa parte qua preferirei aggiungere una nuova libreria in modo tale che sia portabile nei prossimi progetti.  
 All'interno del .h della libreria posso andare a descrivere tramite un array static const (che contiene *matrici*) tutte le lettere come le preferisco.  
 Oltre alle normali funzioni (getLettera, printLettera etcetc), ci sarà una funzione stampaScritta che prende un array di char (e delle impostazioni) e stampa a schermo la scritta seguendo le impostazioni date. Le impostazioni comprenderanno:
