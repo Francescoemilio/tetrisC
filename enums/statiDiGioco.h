@@ -13,7 +13,14 @@ static const statoDiGioco statiDiGioco[1] = {
     {1, "SCHERMATA_INIZIALE"}
 };*/
 
-static const enum statiDiGioco {SCH_INIZIALE, SCH_PRINCIPALE};
-
-
+const int SCH_INIZIALE = 0;
+const int SCH_PRINCIPALE = 1;
+const int SCH_ACCESSO = 2;
+const int SCH_REGISTRAZIONE = 3;
+const int SCH_STATISTICHE = 4;
+const int SCH_IMPOSTAZIONI = 5;
+const int SCH_PLAY = 6;
+const int SCH_PAUSA = 7;
+const int SCH_FINE = 8;
+const int SCH_RECORD = 9;
 #endif

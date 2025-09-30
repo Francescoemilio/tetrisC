@@ -9,6 +9,8 @@
 #include "../headers/utente.h"
 #include "../headers/funzioniGrafiche.h"
 #include "../headers/pila.h"
+#include "../headers/funzioniProgramma.h"
+#include "../enums/statiDiGioco.h"
 
 #define N 10
 #define M 10
@@ -32,15 +34,12 @@ int main( int argc, char *argv[]  ){
     (void)figura;
     (void)modalita;
 
-    int array[10] = {4, 7, 1, 90, 3, 56, 3, 87, 2, 45};
+    
+    
     pila *p = getPila();
+    
+    
     stampaPila(p);
-    for(int i = 0; i<1;i ++){
-      pushPila(array[i], p);
-    }
-    int rv = popPila( p );
-    stampaPila(p);
-    printf("\nValore restituito: %d",rv);
     return 0;
 }
 
