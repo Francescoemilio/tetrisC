@@ -10,5 +10,7 @@ void stampaMatriceBella2( int *posX, int *posY, int **matrice, const int RIGHE, 
 void stampaMatriceBella3( int *posX, int *posY, int **matrice, const int RIGHE, const int COLONNE );
 void stampaCubo2x2(int posX, int posY, int scelta);
 void stampaCubo3x3(int posX, int posY, int scelta);
+void stampaQuadrato(int *posX, int *posY, int lato, char carattere);
+void cambiaColore(int colore);
 
 #endif

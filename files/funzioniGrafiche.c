@@ -290,3 +290,37 @@ static void stampaMatriceTradotta(int **m, const int RIGHE, const int COLONNE, c
         coordinate.X = temp;
     }
 }
+
+
+
+void stampaQuadrato(int *posX, int *posY, int lato, char carattere){
+    if(lato < 2)
+        termina(stderr, "Passato un lato troppo piccolo", __FILE__, __LINE__);
+    int coordinateX, coordinateY;
+    if(posX == NULL || posY == NULL)
+        getConsolePosition(&coordinateX, &coordinateY);
+    else{
+        coordinateX = *posX;
+        coordinateY = *posY;
+        }
+    COORD coord;
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    coord.X = coordinateX;
+    coord.Y = coordinateY;
+    SetConsoleCursorPosition(h, coord);
+    int dimensione = lato % 2 == 0 ? lato : lato-1;
+    for(int i = 0; i<dimensione/2; i++ ){
+        for(int j = 0; j<dimensione; j++){
+            printf("%c",carattere);
+        }
+        coord.Y += 1;
+        SetConsoleCursorPosition(h, coord);
+    }
+}
+
+void cambiaColore(int colore){
+    HANDLE h = GetStdHandle (STD_OUTPUT_HANDLE);
+    if(h == INVALID_HANDLE_VALUE)
+        termina(stderr, "La console non ha restituito una handle valida.", __FILE__, __LINE__);
+    SetConsoleTextAttribute(h, colore);
+}

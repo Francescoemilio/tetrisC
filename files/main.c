@@ -11,6 +11,8 @@
 #include "../headers/pila.h"
 #include "../headers/funzioniProgramma.h"
 #include "../enums/statiDiGioco.h"
+#include "../headers/funzioniFont.h"
+#include <string.h>
 
 #define N 10
 #define M 10
@@ -22,29 +24,32 @@ void gestioneUtenti();
 
 int main( int argc, char *argv[]  ){
     //Valori di default per impostazioni
-    int figura = 1;
-    int modalita = 0;
+    int lato = 4;
+    char durezza = 1;
     if( argc == 3 ){
-      figura = atoi( argv[1] );
-      modalita = atoi( argv[2] );
+      lato = atoi( argv[1] );
+      durezza = atoi( argv[2] );
     }
     else if( argc != 1){
-      termina(stderr, "Uso errato del programma. Usare come:\n\tTetris x y\n\tCon:\n\t x = figura da visualizzare\n\t y = modalita", __FILE__, __LINE__);
+      termina(stderr, "Uso errato del programma. Usare come:\n\tTetris x y\n\tCon:\n\t x = dimensione caratteri\n\t y = simbolo", __FILE__, __LINE__);
     }
-    (void)figura;
-    (void)modalita;
-
+    char *parola = "tetris";
     
     
-    pila *p = getPila();
+    printf("Ora stampo %s:\n",parola);
     
+    stampaScritta(parola, NULL, NULL, lato, NULL, 0, durezza);
+    /*
+    int posX = 1; 
+    int posY = 5;
+    for( int i = 0 ; i<strlen(parola); i++ ){
+      stampaCarattereSizeable(parola[i], &posX, &posY, carattere, lato);
+      posX += lato * 4 +1 ;
+    }
+    */
     
-    stampaPila(p);
     return 0;
 }
-
-
-
 
 
 
