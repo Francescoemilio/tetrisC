@@ -3,6 +3,7 @@
         "elemento.h": "c",
         "funzionigrafiche.h": "c",
         "funzioni.h": "c",
-        "utente.h": "c"
+        "utente.h": "c",
+        "funzionischermate.h": "c"
     }
 }

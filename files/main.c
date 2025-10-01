@@ -13,6 +13,7 @@
 #include "../enums/statiDiGioco.h"
 #include "../headers/funzioniFont.h"
 #include <string.h>
+#include "../headers/funzioniSchermate.h"
 
 #define N 10
 #define M 10
@@ -24,29 +25,23 @@ void gestioneUtenti();
 
 int main( int argc, char *argv[]  ){
     //Valori di default per impostazioni
-    int lato = 4;
-    char durezza = 1;
+    int raggio = 5;
+    char durezza = 6;
     if( argc == 3 ){
-      lato = atoi( argv[1] );
+      raggio = atoi( argv[1] );
       durezza = atoi( argv[2] );
     }
     else if( argc != 1){
       termina(stderr, "Uso errato del programma. Usare come:\n\tTetris x y\n\tCon:\n\t x = dimensione caratteri\n\t y = simbolo", __FILE__, __LINE__);
     }
-    char *parola = "tetris";
+    (void)raggio;
+    (void)durezza;
     
+    stampaSchIniziale();
     
-    printf("Ora stampo %s:\n",parola);
-    
-    stampaScritta(parola, NULL, NULL, lato, NULL, 0, durezza);
-    /*
-    int posX = 1; 
-    int posY = 5;
-    for( int i = 0 ; i<strlen(parola); i++ ){
-      stampaCarattereSizeable(parola[i], &posX, &posY, carattere, lato);
-      posX += lato * 4 +1 ;
-    }
-    */
+
+
+
     
     return 0;
 }
@@ -79,74 +74,6 @@ int switchaModalita( int m, int incremento ){
     else m -= 1;
   }
   return m;
-}
-
-void bullshits(){
-  /*
-  int mpr = N, mpc = M;
-    
-    int valori[N][M] = {
-        {0, 0, 0, 1, 1, 0, 1, 0, 0, 1},
-        {0, 1, 1, 1, 0, 1, 0, 0, 1, 0},
-        {1, 0, 0, 1, 1, 0, 1, 1, 0, 0},
-        {1, 1, 0, 0, 1, 1, 0, 0, 1, 1},
-        {0, 1, 0, 1, 0, 0, 1, 0, 1, 0},
-        {1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
-        {0, 0, 1, 1, 0, 1, 1, 0, 0, 1},
-        {1, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-        {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0}
-    };
-
-    int valori[N][M] = {
-    {1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
-    {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  };
-    
-int **matrice = malloc(mpr * sizeof(int *));
-    for (int i = 0; i < mpr; i++) {
-        matrice[i] = malloc(mpc * sizeof(int));
-    }
-    // copia valori
-    for (int i = 0; i < mpr; i++) {
-        for (int j = 0; j < mpc; j++) {
-            matrice[i][j] = valori[i][j];
-        }
-    }
-
-    stampaMatriceBella( NULL , NULL, matrice, mpr, mpc, modalita);
-
-    
-    system("cls");
-    char c = 0;
-    elemento *e = getFigura(figura);
-    stampaElemento(e, &modalita, NULL, NULL);
-    printf("\nPremi un tasto per continuare..");
-    do{
-      c = getche();
-      if( c == 'd' || c == 'D'){
-        system("cls");
-        e = ruotaOrario( e );
-        stampaElemento(e, &modalita, NULL, NULL);
-      printf("\nPremi un tasto per continuare..");
-      }
-      else if( c == 'a' || c == 'A'){
-        system("cls");
-        e = ruotaAntiOrario( e );
-        stampaElemento(e, &modalita, NULL, NULL);
-      printf("\nPremi un tasto per continuare..");
-      }
-    }while( c != 27 );
-    distruggiElemento(e);
-    */
 }
 
 void mostraBlocchi(int figura, int modalita){

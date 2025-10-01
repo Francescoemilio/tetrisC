@@ -1,6 +1,5 @@
 #include "../headers/funzioniGrafiche.h"
 
-
 //Funzioni solo per questo file e che non devono essere utilizzate in altri file:
 static void calcolaAngoli(int **m, const int RIGHE, const int COLONNE);
 static void inserimentoLati(int **m, const int RIGHE, const int COLONNE);
@@ -324,3 +323,93 @@ void cambiaColore(int colore){
         termina(stderr, "La console non ha restituito una handle valida.", __FILE__, __LINE__);
     SetConsoleTextAttribute(h, colore);
 }
+
+
+
+
+
+
+void stampaStella(int *posX, int *posY, int raggio){
+    if(raggio <=  0) return;
+
+    int coordinateX = 0, coordinateY = 0;
+    if(posX == NULL || posY == NULL)
+        getConsolePosition(&coordinateX, &coordinateY);
+    else{
+        coordinateX = *posX;
+        coordinateY = *posY;
+    }
+    //Allocco e inizializzo la matrice.
+    int diametro = 2*raggio + 1;
+    char **canvas;
+    canvas = (char **)malloc(sizeof(char *)*diametro);
+    if( canvas == NULL )
+        termina(stderr, "Errore allocazione matrice.", __FILE__, __LINE__);
+    for(int i = 0; i<diametro; i++){
+        canvas[i] = (char *)malloc( sizeof(char) *diametro );
+        if( canvas[i] == NULL )
+            termina(stderr, "Errore nell'alloccare la matrice.", __FILE__, __LINE__ );
+        for(int j = 0; j<diametro; j++)
+            canvas[i][j] = ' ';
+    }
+
+    int cx = raggio, cy = raggio; // posizioni centro
+    // genera raggi
+    int raggi = 8+rand()%8;
+    for (int i = 0; i < raggi; i++) {
+        double angolo = (2 * PI * i) / raggi;
+        int lunghezza = raggio<8?raggio:raggio/2 + rand() % (raggio/2 + 1); // random tra r/2 e r
+        for (int k = 0; k < lunghezza; k++) {
+            int x = cx + (int)(cos(angolo) * k);
+            int y = cy + (int)(sin(angolo) * k);
+            if (x >= 0 && x < diametro && y >= 0 && y < diametro)
+                canvas[y][x] = '.';
+        }
+    }
+    // stampa canvas
+    HANDLE h = GetStdHandle (STD_OUTPUT_HANDLE);
+    if(h == INVALID_HANDLE_VALUE)
+        termina(stderr, "Errore handle della console.", __FILE__, __LINE__);
+    COORD coord;
+    coord.X = coordinateX; 
+    coord.Y = coordinateY;
+    for (int y = 0; y < diametro; y++) {
+        for (int x = 0; x < diametro; x++) {
+            if(canvas[x][y] != ' '){
+                SetConsoleCursorPosition(h, coord);
+                for(int j = 0; j<2; j++){
+                    // carattere a caso per effetto
+                    switch (rand()%3) {
+                    case 0: printf("*"); break;
+                    case 1: printf("+"); break;
+                    default: printf("."); break;
+                }
+                }
+            }
+            coord.X += 2; 
+        }
+        coord.X = coordinateX;
+        coord.Y += 1;
+    }
+}
+
+void getConsoleGridSize(HANDLE *handleUtente, int *righe, int *colonne){
+    if(righe == NULL || colonne == NULL)
+        termina(stderr, "Errore, righe e colonne NULL.", __FILE__, __LINE__);
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    if(handleUtente != NULL && GetConsoleScreenBufferInfo(handleUtente, &csbi) ){
+        *righe = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+        *colonne = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+        return ;
+    }
+    else if( handleUtente != NULL )
+            termina(stderr, "Errore ottenendo le informazioni del buffer della console.", __FILE__, __LINE__);
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if(h == INVALID_HANDLE_VALUE)
+        termina(stderr, "Errore nella handle.", __FILE__, __LINE__);
+    if ( !GetConsoleScreenBufferInfo(h, &csbi) )
+        termina(stderr, "Errore ottenendo le informazioni del buffer della console.", __FILE__, __LINE__);
+    *righe = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    *colonne = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+}
+
