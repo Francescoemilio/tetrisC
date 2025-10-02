@@ -17,13 +17,14 @@ struct pila_s{
 typedef struct pila_s pila;
 
 nodo_P *getNodo( int value );
-void distruggiNoto(nodo_P *nodo);
+void distruggiNodo(nodo_P *nodo);
 void stampaNodo( nodo_P *nodo );
 pila *getPila();
 void pushPila(int value, pila *p);
 int popPila( pila *p );
 void stampaPila(pila *p);
 int pilaVuota(pila *p);
+void distruggiPila(pila *p);
 
 
 #endif

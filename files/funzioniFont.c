@@ -35,7 +35,7 @@ void stampaCarattere(const char carattere, int *posX, int *posY, const char simb
 }
 
 
-void stampaScritta( const char *msg, int *posX, int *posY, int dimensione, int *colori, int dimColori, int durezza ){
+void stampaScritta( const char *msg, int *posX, int *posY, int dimensione, const int *colori, int dimColori, int durezza ){
     int dimensioneParola = strnlen(msg, 20);
     if( durezza < 0 || durezza > 5 )
         termina(stderr, "Durezza non valida per la stampa della parola. Minimo 0 massimo 5.", __FILE__, __LINE__);

@@ -1,6 +1,7 @@
 #include "../headers/pila.h"
 
-
+//FUNZIONI
+void distruggiPilaRic(nodo_P *p);
 
 nodo_P *getNodo( int value ){
     nodo_P *nodo = (nodo_P *)malloc( sizeof(nodo_P) );
@@ -8,7 +9,7 @@ nodo_P *getNodo( int value ){
     nodo->next = NULL;
     return nodo;
 }
-void distruggiNoto(nodo_P *nodo){
+void distruggiNodo(nodo_P *nodo){ 
     nodo->next = NULL;
     free(nodo);
 }
@@ -24,35 +25,23 @@ pila *getPila(){
 
 void pushPila(int value, pila *p){
     nodo_P *nodo = getNodo( value );
-    if( pilaVuota( p ) ){
-        p->head = getNodo( value );
-        return;
-        }
-    nodo_P *temp = p->head;
-    if( temp->next == NULL ){
-        temp->next = nodo;
+    //nodo_P *temp;
+    if(pilaVuota(p)){
+        p-> head = nodo;
         return;
     }
-    while( temp->next != NULL )
-        temp = temp->next;
-    temp->next = nodo;
+    else{
+        nodo -> next = p -> head;
+        p -> head = nodo;
+    }
 }
 int popPila( pila *p ){
     if( pilaVuota(p))
         return 0;
-    if( p->head->next == NULL ){
-        int rv = p->head->value;
-        free(p->head);
-        p->head = NULL;
-        return rv;
-    }
-    nodo_P *temp;
-    temp = p->head;
-    while(temp->next->next != NULL)
-        temp = temp->next;
-    int rv = temp->next->value;
-    free(temp->next);
-    temp->next = NULL;
+    nodo_P *temp = p->head;
+    p->head = p->head->next;
+    int rv = temp->value;
+    distruggiNodo(temp);
     return rv;
 }
 
@@ -75,9 +64,33 @@ void stampaPila(pila *p){
 
 
 int pilaVuota(pila *p){
-    if(p == NULL)
-        termina(stderr, "Pila null.", __FILE__, __LINE__);
-    if(p->head == NULL)
+    if(p == NULL || p->head == NULL)
         return 1;
     return 0;
+}
+
+void distruggiPila(pila *p){
+    if(p == NULL)
+        return;
+    if( p->head == NULL)
+        free(p);
+    else{
+        nodo_P *temp;
+        temp = p->head;
+        while(p->head != NULL){
+            distruggiNodo(temp);
+            temp = p->head;
+            p->head = p->head->next;
+        }
+    }
+}
+
+void distruggiPilaRic(nodo_P *p){
+    if(p->next == NULL){
+        distruggiNodo(p);
+    }
+    else{
+        distruggiPilaRic(p->next);
+        distruggiNodo(p);
+    }
 }

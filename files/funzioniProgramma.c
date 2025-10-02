@@ -1,6 +1,30 @@
 #include "../headers/funzioniProgramma.h"
 
+#define POSIZIONE_UTENTI "dati/users.txt"
 
+
+statoGiocoTetris *setUp(){
+    statoGiocoTetris *sgt = (statoGiocoTetris *)malloc( sizeof(statoGiocoTetris) );
+    if(sgt == NULL)
+        termina(stderr, "Impossibile avviare il gioco.", __FILE__, __LINE__);
+    sgt->p = getPila();
+    pushPila( SCH_INIZIALE , sgt->p );
+    sgt->dimensionePila = 1;
+    sgt->listaUtenti = NULL;
+    sgt->dimensioneUtenti = 0;
+    sgt->versione = (char *)malloc(sizeof(char)*10);
+    strcpy( sgt->versione, VERSIONE );
+    sgt->utenteLoggato = NULL;
+    return sgt;
+}
+void spegni( statoGiocoTetris *sgt ){ 
+    distruggiPila(sgt->p);
+    for(int i = 0; i< sgt->dimensioneUtenti; i++){
+        distruggiUtente( sgt->listaUtenti[i] );
+        free(sgt->listaUtenti);
+    }
+    free(sgt->versione);
+}
 
 char *getNomeByCodice(int codice){
     char *nome = (char *)malloc(sizeof(char)*40);
@@ -19,6 +43,24 @@ char *getNomeByCodice(int codice){
             strcpy(nome, "SCH_ASSENTE");
     }
     return nome;
+}
+
+
+
+
+void gst_schermataIniziale(  ){
+    stampaSchIniziale();
+    getch();
+}
+
+
+void gst_schermataIniziale( statoGiocoTetris *sgt ){
+    sgt -> listaUtenti = caricaUtenti( POSIZIONE_UTENTI, &sgt->dimensioneUtenti );
+    
+
+
+
+
 }
 
 

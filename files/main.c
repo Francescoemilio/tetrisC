@@ -14,9 +14,13 @@
 #include "../headers/funzioniFont.h"
 #include <string.h>
 #include "../headers/funzioniSchermate.h"
+#include <time.h>
+
 
 #define N 10
 #define M 10
+
+
 
 int switchaFigura(int v, int incremento);
 int switchaModalita(int m, int incremento);
@@ -27,7 +31,12 @@ int main( int argc, char *argv[]  ){
     //Valori di default per impostazioni
     int raggio = 5;
     char durezza = 6;
-    if( argc == 3 ){
+    char *kWord;
+    if( argc == 2 ) {
+      kWord = (char *)malloc(sizeof(char)*strlen(argv[1])+1 );
+      strcpy(kWord, argv[1]);
+    }
+    else if( argc == 3 ){
       raggio = atoi( argv[1] );
       durezza = atoi( argv[2] );
     }
@@ -37,8 +46,32 @@ int main( int argc, char *argv[]  ){
     (void)raggio;
     (void)durezza;
     
-    stampaSchIniziale();
-    
+    FILE *f = fopen(kWord, "r");
+    if(f == NULL)
+      termina(stderr, "File non trovato.", __FILE__, __LINE__);
+    pila *p = getPila();
+    char carattereLetto;
+    int valoreAggiunto;
+    srand(time(NULL));
+    while( fscanf( f, "%c\n", &carattereLetto) == 1){
+      if(carattereLetto == '+'){
+        valoreAggiunto = rand()%10;
+        pushPila( valoreAggiunto , p );
+        printf("Aggiunto: %d",valoreAggiunto);
+      }
+      else{
+        popPila(p);
+        valoreAggiunto = printf("Rimosso: %d",valoreAggiunto);
+      }
+      printf("\nPila: ");
+      stampaPila(p);
+      printf("\n");
+    }
+    printf("Fine file, distruggo la pila..\n");
+    distruggiPila(p);
+    printf("Pila distrutta: ");
+    stampaPila(p);
+    fclose(f);
 
 
 
