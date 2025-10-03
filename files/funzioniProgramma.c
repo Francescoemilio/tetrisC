@@ -15,6 +15,7 @@ statoGiocoTetris *setUp(){
     sgt->versione = (char *)malloc(sizeof(char)*10);
     strcpy( sgt->versione, VERSIONE );
     sgt->utenteLoggato = NULL;
+    sgt->utenteIscritto = NULL;
     return sgt;
 }
 void spegni( statoGiocoTetris *sgt ){ 
@@ -54,13 +55,15 @@ void gst_schermataIniziale(  ){
 }
 
 
-void gst_schermataIniziale( statoGiocoTetris *sgt ){
+void gst_schermataAccesso( statoGiocoTetris *sgt ){
     sgt -> listaUtenti = caricaUtenti( POSIZIONE_UTENTI, &sgt->dimensioneUtenti );
-    
-
-
-
-
+    if(sgt -> listaUtenti == NULL){
+        //Non ci sono utenti, come la gestisco ?
+        sgt->utenteLoggato = NULL;
+        popPila(sgt->p);
+        pushPila(SCH_REGISTRAZIONE, sgt->p);
+        return;
+    }
 }
 
 

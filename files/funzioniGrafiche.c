@@ -413,3 +413,46 @@ void getConsoleGridSize(HANDLE *handleUtente, int *righe, int *colonne){
     *colonne = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 }
 
+
+void stampaContenitore(int *posX, int *posY, int base, int altezza, int doppio, int *colore){
+    int coordinateX, coordinateY;
+    if(posX == NULL || posY == NULL)
+        getConsolePosition(&coordinateX, &coordinateY);
+    else{
+        coordinateX = *posX;
+        coordinateY = *posY;
+    }
+    if(colore)
+        cambiaColore(*colore);
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if(h == INVALID_HANDLE_VALUE)
+        termina(stderr, "Errore nella handle", __FILE__, __LINE__);
+    COORD coord;
+    coord.X = coordinateX;
+    coord.Y = coordinateY;
+    SetConsoleCursorPosition(h, coord);
+    int scelta = doppio?1:0;
+    //Inizio a stampare il riquadro.
+    //base superiore
+    printf("%c",opzioni[scelta].TSXC);
+    for(int i = 0; i<base-2; i++)
+        printf("%c",opzioni[scelta].orizzontale);
+    printf("%c",opzioni[scelta].TDXC);
+    //lati
+    coord.Y += 1;
+    for(int i = 0; i<altezza-2; i++){
+        SetConsoleCursorPosition(h, coord);
+        printf("%c",opzioni[scelta].verticale);
+        coord.X += base -1;
+        SetConsoleCursorPosition(h, coord);
+        printf("%c",opzioni[scelta].verticale);
+        coord.X = coordinateX;
+        coord.Y += 1;
+    }
+    //base inferiore
+    SetConsoleCursorPosition(h, coord);
+    printf("%c",opzioni[scelta].BSXC);
+    for(int i = 0; i<base-2; i++)
+        printf("%c",opzioni[scelta].orizzontale);
+    printf("%c",opzioni[scelta].BDXC);
+}

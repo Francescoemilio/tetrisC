@@ -49,3 +49,8 @@ void stampaSchIniziale(){
     SetConsoleCursorPosition(h, coordinate);
 }
 
+
+int stampaSchAccesso( char **opzioni, int dimensioneOpzioni, char *secondaOpzione ){
+    return 0;
+}
+

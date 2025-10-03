@@ -17,13 +17,14 @@ struct gioco_s {
     int dimensioneUtenti;
     char *versione;
     utente *utenteLoggato;
+    utente *utenteIscritto;
 
 };
 typedef struct gioco_s statoGiocoTetris;
 
 char *getNomeByCodice(int codice);
-void gst_schermataIniziale( statoGiocoTetris *sgt );
-void gst_schermataAccesso(  );
+void gst_schermataIniziale( );
+void gst_schermataAccesso( statoGiocoTetris *sgt  );
 statoGiocoTetris *setUp();
 void spegni( statoGiocoTetris *sgt );
 

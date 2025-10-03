@@ -21,6 +21,7 @@ void stampaQuadrato(int *posX, int *posY, int lato, char carattere);
 void cambiaColore(int colore);
 void stampaStella(int *posX, int *posY, int raggio);
 void getConsoleGridSize(HANDLE *handleUtente, int *righe, int *colonne);
+void stampaContenitore(int *posX, int *posY, int base, int altezza, int doppio, int *colore);
 
 
 #endif

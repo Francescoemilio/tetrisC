@@ -8,7 +8,7 @@
 
 
 void stampaSchIniziale();
-
+int stampaSchAccesso( char **opzioni, int dimensioneOpzioni, char *secondaOpzione );
 
 
 

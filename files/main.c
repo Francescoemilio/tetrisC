@@ -28,31 +28,35 @@ void mostraBlocchi(int figura, int modalita);
 void gestioneUtenti();
 
 int main( int argc, char *argv[]  ){
+    srand(time(NULL));
     //Valori di default per impostazioni
-    int raggio = 5;
-    char durezza = 6;
-    char *kWord;
-    if( argc == 2 ) {
-      kWord = (char *)malloc(sizeof(char)*strlen(argv[1])+1 );
-      strcpy(kWord, argv[1]);
-    }
-    else if( argc == 3 ){
-      raggio = atoi( argv[1] );
-      durezza = atoi( argv[2] );
+    int base = 5;
+    char altezza = 6;
+    int spessore = 0;
+    if( argc == 4 ){
+      base = atoi( argv[1] );
+      altezza = atoi( argv[2] );
+      spessore = atoi( argv[3] );
     }
     else if( argc != 1){
       termina(stderr, "Uso errato del programma. Usare come:\n\tTetris x y\n\tCon:\n\t x = dimensione caratteri\n\t y = simbolo", __FILE__, __LINE__);
     }
-    (void)raggio;
-    (void)durezza;
+    int posX = rand()%20;
+    int posY = rand()%5;
+    stampaContenitore(&posX, &posY, base, altezza, spessore, NULL);
+
+
     
-    FILE *f = fopen(kWord, "r");
+    return 0;
+}
+
+void testPila(const char *kWord){
+  FILE *f = fopen(kWord, "r");
     if(f == NULL)
       termina(stderr, "File non trovato.", __FILE__, __LINE__);
     pila *p = getPila();
     char carattereLetto;
     int valoreAggiunto;
-    srand(time(NULL));
     while( fscanf( f, "%c\n", &carattereLetto) == 1){
       if(carattereLetto == '+'){
         valoreAggiunto = rand()%10;
@@ -72,13 +76,7 @@ int main( int argc, char *argv[]  ){
     printf("Pila distrutta: ");
     stampaPila(p);
     fclose(f);
-
-
-
-    
-    return 0;
 }
-
 
 
 int switchaFigura(int v, int incremento){
